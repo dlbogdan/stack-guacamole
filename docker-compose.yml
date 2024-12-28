@@ -1,7 +1,6 @@
 services:
   guac-init:
     user: root 
-    # Use the same version as the main Guacamole image
     image: guacamole/guacamole:1.5.5
     # We'll share the same volume that MySQL will read from
     volumes:
@@ -71,9 +70,9 @@ services:
       LDAP_USER_BASE_DN: ${LDAP_USER_BASE_DN}
       LDAP_SEARCH_BIND_DN: ${LDAP_SEARCH_BIND_DN}
       LDAP_SEARCH_BIND_PASSWORD: ${LDAP_SEARCH_BIND_PASSWORD}
-      LDAP_USERNAME_ATTRIBUTE: ${LDAP_USERNAME_ATTRIBUTE}
-      MYSQL_AUTO_CREATE_ACCOUNTS: ${MYSQL_AUTO_CREATE_ACCOUNTS}
-      TOTP_ENABLED: ${TOTP_ENABLED}
+      LDAP_USERNAME_ATTRIBUTE: ${LDAP_USERNAME_ATTRIBUTE:-sAMAccountName}
+      MYSQL_AUTO_CREATE_ACCOUNTS: ${MYSQL_AUTO_CREATE_ACCOUNTS:-true}
+      TOTP_ENABLED: ${TOTP_ENABLED:-true}
       TOTP_ISSUER: ${TOTP_ISSUER:-Apache Guacamole}
       TOTP_DIGITS: ${TOTP_DIGITS:-6}
       TOTP_PERIOD: ${TOTP_PERIOD:-30}
